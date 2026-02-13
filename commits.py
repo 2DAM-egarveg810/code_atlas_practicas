@@ -8,12 +8,13 @@ class GitGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Git Commit & Push")
-        self.root.geometry("600x500")
+        self.root.geometry("750x800")
+        self.root.minsize(650, 500)
         self.root.resizable(True, True)
         
         # Directorio actual (repositorio Git)
         self.repo_path = os.getcwd()
-        
+
         self.create_widgets()
         self.validate_git_repo()
     
