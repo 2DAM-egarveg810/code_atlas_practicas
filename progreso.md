@@ -41,3 +41,8 @@ https://medium.com/@maruthurnavin/handling-empty-and-optional-fields-in-django-b
 https://docs.djangoproject.com/en/6.0/ref/models/fields/
 
 Si se agrega "-" a un atributo fecha del orderby se ordenan desde el mas reciente al mas antiguo
+
+Creo que ya he agregado todas las urls, al menos las que tengo pensadas por ahora.
+
+He encontrado una librería guapisima para hacer highlights del codigo
+https://prismjs.com/#full-list-of-features
