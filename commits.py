@@ -47,7 +47,7 @@ class GitGUI:
         ttk.Label(top_frame, text=self.repo_path, wraplength=550).pack(anchor="w")
 
         ttk.Label(top_frame, text="Tipos:", font=("Arial", 10, "bold")).pack(anchor="w")
-        ttk.Label(top_frame, text="fix: corrección de bug\nui: cambios visuales\nmap: mapaLeaflet\nauth: autenticación\nrefactor: mejorar código\ndocs: documentación\nconfig: configuración\nchore: mantenimiento", wraplength=550).pack(anchor="w")
+        ttk.Label(top_frame, text="feat:funcionalidad nueva\nfix: corrección de bug\nui: cambios visuales\nmap: mapaLeaflet\nauth: autenticación\nrefactor: mejorar código\ndocs: documentación\nconfig: configuración\nchore: mantenimiento", wraplength=550).pack(anchor="w")
 
         # Frame para mensaje de commit
         msg_frame = ttk.LabelFrame(self.root, text=" Mensaje de Commit ", padding=10)
@@ -77,7 +77,10 @@ class GitGUI:
         
         self.status_btn = ttk.Button(btn_frame, text="Ver Estado", command=self.git_status)
         self.status_btn.pack(side="left", padx=5)
-        
+
+        self.add_btn = ttk.Button(btn_frame, text="Add", command=self.git_add)
+        self.add_btn.pack(side="left", padx=5)
+
         self.commit_btn = ttk.Button(btn_frame, text="Commit", command=self.git_commit)
         self.commit_btn.pack(side="left", padx=5)
         
@@ -146,7 +149,15 @@ class GitGUI:
         """Muestra el estado actual del repositorio"""
         self.append_result("=== git status ===", clear=True)
         self.run_git_command(["git", "status"])
-    
+
+    def git_add(self):
+        self.append_result("=== git add ===", clear=True)
+        success, _ = self.run_git_command(["git", "add", "."])
+
+        if success:
+            messagebox.showinfo("Éxito", "Add realizado correctamente")
+            self.update_preview()
+
     def git_commit(self):
         """Realiza un commit con el mensaje proporcionado"""
         title = self.title_entry.get().strip()
