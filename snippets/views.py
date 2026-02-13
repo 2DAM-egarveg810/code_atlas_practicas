@@ -1,7 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from snippets.models import Snippet
+
+
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the snippets index.")
+    snippets_list = Snippet.objects.all().order_by("-pub_date")
+    context = {"snippets_list": snippets_list}
+    return render(request, "snippets/index.html", context)

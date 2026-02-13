@@ -1,6 +1,7 @@
 Voy a hacer el proyecto con 2 apps: una para manejar los usuarios y otra para manejar los snippets
 
 Lo primero es crear las apps
+
 - python manage.py startapp accounts
 - python manage.py startapp snippets
 
@@ -11,12 +12,14 @@ Claramente ha petado, asi que voy a intentar solucionarlo (con un migrate no lo 
 
 Fallo mío, que no tenía instalado el servidor postgres.
 He creado una database y un usuario.
+
 - CREATE DATABASE codeatlas;
 - CREATE USER codeatlas_admin WITH PASSWORD 'codeatlas';
 - GRANT ALL PRIVILEGES ON DATABASE codeatlas TO codeatlas_admin;
 - ALTER DATABASE codeatlas OWNER TO codeatlas_admin;
 
-He cambiado setting.py y he puesto los parametros de forma directa, no como aparece en la documentación. Próximamente lo cambiaré, por ahora se queda así
+He cambiado setting.py y he puesto los parametros de forma directa, no como aparece en la documentación. Próximamente lo
+cambiaré, por ahora se queda así
 
 ```python
 DATABASES = {
@@ -31,5 +34,10 @@ DATABASES = {
 }
 ```
 
-
 Como tengo claras las rutas, voy a declararlas en los urls.py
+
+Haciendo los modelos he caído en que pueden haber campos opcionales
+https://medium.com/@maruthurnavin/handling-empty-and-optional-fields-in-django-b7ef7979e83e
+https://docs.djangoproject.com/en/6.0/ref/models/fields/
+
+Si se agrega "-" a un atributo fecha del orderby se ordenan desde el mas reciente al mas antiguo
