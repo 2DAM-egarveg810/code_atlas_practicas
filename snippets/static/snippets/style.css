@@ -1,7 +1,6 @@
 .code-container {
     max-height: 200px;
-    overflow-y: auto;
-    overflow-x: auto;
+    overflow: auto;
     background-color: #1e1e1e;
     border-radius: 4px;
     padding: 1rem;

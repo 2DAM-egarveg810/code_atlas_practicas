@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from snippets.models import Snippet
 
@@ -16,8 +16,9 @@ def new_snippet(request):
     return None
 
 
-def snippet_detail(request):
-    return None
+def snippet_detail(request, pk):
+    snippet = get_object_or_404(Snippet, pk=pk)
+    return render(request, 'snippets/snippet_detail.html', {'snippet': snippet})
 
 
 def map_snippet(request):
