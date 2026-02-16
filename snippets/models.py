@@ -35,12 +35,12 @@ class Snippet(models.Model):
         max_length=20
     )
     cont_visited = models.IntegerField(default=0)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(default=1, null=True, blank=True)
+    longitude = models.FloatField(default=1, null=True, blank=True)
 
     def __str__(self):
         return f'{self.title} [{self.language}]'
-    
+
     def get_language_badge_color(self):
         return {
             'python': 'bg-primary',

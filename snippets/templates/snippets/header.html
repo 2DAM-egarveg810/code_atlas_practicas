@@ -8,7 +8,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">CodeAtlas</a>
+            <a class="navbar-brand" href="/snippets">CodeAtlas</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -17,10 +17,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Prueba</a>
+                        <a class="nav-link active" href="/snippets">Snippets</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Prueba 1</a>
+                        <a class="nav-link" href="{% url 'snippets:new_snippet' %}">Prueba 1</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Prueba 2</a>
