@@ -29,6 +29,7 @@
     </style>
 </head>
 <body class="bg-light">
+{% include 'snippets/header.html' %}
 <div class="container py-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -41,7 +42,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-start mb-2">
                 <h1 class="h4 mb-0">{{ snippet.title }}</h1>
-                <span class="badge bg-primary">{{ snippet.get_language_display }}</span>
+                <span class="badge {{ snippet.get_language_badge_color }}">{{ snippet.get_language_display }}</span>
             </div>
 
             <p class="text-muted small mb-3">
@@ -52,7 +53,6 @@
             {% if snippet.description %}
                 <p class="mb-3">{{ snippet.description }}</p>
             {% endif %}
-
 
             <div class="code-block">
                 <pre><code class="language-{{ snippet.language }}">{{ snippet.source_code }}</code></pre>
