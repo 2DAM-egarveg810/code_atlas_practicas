@@ -38,7 +38,7 @@
                                 <span class="badge {{ snippet.get_language_badge_color }}">{{ snippet.get_language_display }}</span>
                                 <small class="text-muted">{{ snippet.pub_date|date:"d/m/Y" }}</small>
                             </div>
-                            
+
                             <a href="{% url 'snippets:snippet_detail' snippet.pk %}" class="stretched-link"></a>
                         </div>
                     </div>

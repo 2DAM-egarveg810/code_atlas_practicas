@@ -1,4 +1,4 @@
-from django.contrib.auth import forms
+from django.contrib.auth import forms, logout, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 
@@ -24,6 +24,7 @@ def register_user(request):
             newuser.save()
             u = UserProfile.objects.create(user=newuser)
             u.save()
+            login(request, newuser)
             return redirect('snippets:index')
     else:
         form = forms.UserCreationForm()
@@ -37,3 +38,9 @@ def profile(request):
 
 def profile_username(request):
     return None
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("snippets:index")
+    # return render(request, 'accounts/logout_user.html')
