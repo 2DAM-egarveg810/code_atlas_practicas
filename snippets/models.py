@@ -1,6 +1,5 @@
-from django.db import models
-from django.db.models import ForeignKey
-from django.templatetags.i18n import language
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 
 from accounts.models import UserProfile
 
@@ -34,9 +33,12 @@ class Snippet(models.Model):
         choices=LENGUAJES_CHOICES,
         max_length=20
     )
+
     cont_visited = models.IntegerField(default=0)
     latitude = models.FloatField(default=1, null=True, blank=True)
     longitude = models.FloatField(default=1, null=True, blank=True)
+
+    point = models.PointField(default=Point(0, 0), null=True, blank=True)
 
     def __str__(self):
         return f'{self.title} [{self.language}]'
