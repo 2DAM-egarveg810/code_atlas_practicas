@@ -32,6 +32,7 @@
         return LANG_COLORS[lang] || DEFAULT_COLOR;
     }
 
+    // ej: 15 feb 2024
     function formatDate(dateStr) {
         if (!dateStr) return 'N/A';
         try {
@@ -62,7 +63,7 @@
         log("Mapa inicializado");
     }
 
-    // === Estilo ===
+    // === Estilo de los puntos ===
     function styleFeature(feature) {
         return {
             weight: 2,
@@ -72,6 +73,7 @@
         };
     }
 
+    // Convierte cada punto en un circleMarker
     function pointToLayer(feature, latlng) {
         const lang = feature.properties?.language;
         const color = getColorForLanguage(lang);
@@ -110,6 +112,7 @@
     }
 
     // === Construir parametros de consulta ===
+    // Si USE_BBOX es true, devuelve un string con los limites del mapa visible
     function buildParams() {
         if (!USE_BBOX) return {};
         const b = map.getBounds();
@@ -151,6 +154,7 @@
         container.innerHTML = html;
     }
 
+    // Al hacer clic en el mapa obtiene coordenadas con 6 decimales y redirige para crear el snippet
     function onMapClick(e) {
         const lat = e.latlng.lat.toFixed(6);
         const lng = e.latlng.lng.toFixed(6);
@@ -170,62 +174,62 @@
             url: URL_GEOJSON,
             method: "GET",
             dataType: "json",
-            data: buildParams(),
+            data: buildParams(), // Parametros bbox si USE_BBOX=true
             timeout: 15000,
-        })
-            .done(function (data) {
-                layerGroup.clearLayers();
+        }).done(function (data) {
+            layerGroup.clearLayers(); // Limpia marcadores anteriores
 
-                // Validar estructura GeoJSON
-                if (!data || !Array.isArray(data.features)) {
-                    log("Respuesta inválida");
-                    return;
+            // Validar estructura GeoJSON
+            if (!data || !Array.isArray(data.features)) {
+                log("Respuesta inválida");
+                return;
+            }
+
+            geoLayer = L.geoJSON(data, {
+                style: styleFeature,
+                pointToLayer: pointToLayer,
+                onEachFeature: onEachFeature,
+            }).addTo(layerGroup);
+
+            // Actualizar contador total
+            const count = data.features.length;
+            document.getElementById('totalCount').textContent = count;
+
+            // Generar leyenda
+            generateLegend(data.features);
+            log(`Cargados ${count} snippets`);
+
+            // Ajusta el zoom a los datos si hay
+            if (FIT_BOUNDS_ON_LOAD && count > 0) {
+                try {
+                    map.fitBounds(geoLayer.getBounds(), {padding: [30, 30]});
+                } catch (e) {
+                    console.warn("No se pudo ajustar el zoom:", e);
                 }
-
-                geoLayer = L.geoJSON(data, {
-                    style: styleFeature,
-                    pointToLayer: pointToLayer,
-                    onEachFeature: onEachFeature,
-                }).addTo(layerGroup);
-
-                // Actualizar contador
-                const count = data.features.length;
-                document.getElementById('totalCount').textContent = count;
-
-                // Generar leyenda
-                generateLegend(data.features);
-
-                log(`Cargados ${count} snippets`);
-
-                // Ajustar bounds si hay datos
-                if (FIT_BOUNDS_ON_LOAD && count > 0) {
-                    try {
-                        map.fitBounds(geoLayer.getBounds(), {padding: [30, 30]});
-                    } catch (e) {
-                        console.warn("No se pudo ajustar el zoom:", e);
-                    }
-                }
-            })
-            .fail(function (xhr) {
-                const msg = `Error ${xhr.status}: ${xhr.responseText || xhr.statusText}`;
-                log("" + msg);
-                console.error("GeoJSON load failed:", xhr);
-
-                const container = document.getElementById('legendContainer');
-                if (container) {
-                    container.innerHTML = `<small class="text-danger">Error al cargar</small>`;
-                }
-            });
+            }
+        }).fail(function (xhr) {
+            const msg = `Error ${xhr.status}: ${xhr.responseText || xhr.statusText}`;
+            log("" + msg);
+            console.error("GeoJSON load failed:", xhr);
+            const container = document.getElementById('legendContainer');
+            if (container) {
+                container.innerHTML = `<small class="text-danger">Error al cargar</small>`;
+            }
+        });
     }
 
     // === Inicializacion ===
     $(document).ready(function () {
+        // Crea el mapa
         initMap();
 
+        // Registra clic para crear snippets
         map.on('click', onMapClick);
 
+        // Carga y muestra los datos
         loadGeoJSON();
 
+        // Si USE_BBOX=true, recarga datos al mover/zoomear el mapa
         if (USE_BBOX) {
             map.on("moveend", function () {
                 loadGeoJSON();
