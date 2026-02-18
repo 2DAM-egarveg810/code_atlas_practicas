@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'snippets.apps.SnippetsConfig',
     'accounts.apps.AccountsConfig',
-    "django.contrib.gis"
+    "django.contrib.gis",
+    'leaflet',
 ]
 
 MIDDLEWARE = [

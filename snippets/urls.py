@@ -9,4 +9,5 @@ urlpatterns = [
     path("new/", views.new_snippet, name="new_snippet"),
     path("<int:pk>/", views.snippet_detail, name="snippet_detail"),
     path("map/", views.map_snippet, name="map_snippet"),
+    path('map/api/geojson/', views.snippets_geojson, name='snippets_geojson'),
 ]

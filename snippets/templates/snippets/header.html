@@ -23,7 +23,7 @@
                         <a class="nav-link" href="{% url 'snippets:new_snippet' %}">New Snippet</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mapa</a>
+                        <a class="nav-link" href="{% url 'snippets:map_snippet' %}">Mapa</a>
                     </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">

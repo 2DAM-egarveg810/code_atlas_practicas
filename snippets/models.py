@@ -35,10 +35,8 @@ class Snippet(models.Model):
     )
 
     cont_visited = models.IntegerField(default=0)
-    latitude = models.FloatField(default=1, null=True, blank=True)
-    longitude = models.FloatField(default=1, null=True, blank=True)
 
-    point = models.PointField(default=Point(0, 0), null=True, blank=True)
+    point = models.PointField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.title} [{self.language}]'
