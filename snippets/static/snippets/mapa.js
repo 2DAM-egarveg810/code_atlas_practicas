@@ -91,7 +91,6 @@
     // === Popup ===
     function onEachFeature(feature, layer) {
         const p = feature.properties || {};
-
         const popupContent = `
       <div class="snippet-popup">
         <div class="title">${p.title || 'Sin título'}</div>
@@ -101,7 +100,7 @@
         ${p.description ? `<div class="description">${p.description}</div>` : ''}
         <hr class="my-2">
         <div class="meta">
-          <div> ${p.author.username || 'Anónimo'}</div>
+          <div> ${p.author || 'Anónimo'}</div>
           <div> ${formatDate(p.pub_date)}</div>
           <div> ${p.cont_visited || 0} visitas</div>
         </div>

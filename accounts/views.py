@@ -1,9 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth import forms, logout, login, authenticate
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 
 from accounts.models import UserProfile
+from snippets.models import Snippet
 
 
 # Create your views here.
@@ -44,8 +46,20 @@ def register_user(request):
     return render(request, "accounts/register_user.html", {"form": form})
 
 
+@login_required
 def profile(request):
-    return None
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+
+    snippets = Snippet.objects.filter(
+        author=user_profile
+    ).order_by('-pub_date')
+
+    context = {
+        "user_profile": user_profile,
+        "snippets_list": snippets,
+        "page_title": f"Perfil de {request.user.username}"
+    }
+    return render(request, 'accounts/my_profile.html', context)
 
 
 def profile_username(request):
