@@ -47,6 +47,8 @@ Creo que ya he agregado todas las urls, al menos las que tengo pensadas por ahor
 He encontrado una librería guapisima para hacer highlights del codigo
 https://prismjs.com/#full-list-of-features
 
+que brusco es el .reload(), lo siento por quien use la web esta aunque sea para probar
+
 # Lista de funciones MAP
 
 | Función                                    | Descripción                                                | Ejemplo                                                    |
@@ -93,3 +95,13 @@ https://prismjs.com/#full-list-of-features
 | `zoomend`                         | Cambia el nivel de zoom             | Mostrar/ocultar capas según zoom    |
 | `locationfound` / `locationerror` | Resultado de `map.locate()`         | Mostrar marcador de usuario o error |
 | `layeradd` / `layerremove`        | Se añade/elimina una capa           | Sincronizar UI con estado del mapa  |
+
+Para el index de snippets a lo mejor me conviene usar Paginator
+https://docs.djangoproject.com/en/6.0/topics/pagination/
+
+Swal para hacer toasts
+https://sweetalert2.github.io/#configuration
+
+He cambiado a async y await para probar el tema asincrono en js
+
+Me acabo de dar cuenta de que no he hecho push estos dias madre mia

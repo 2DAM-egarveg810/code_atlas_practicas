@@ -1,0 +1,17 @@
+{
+  "name": "codeatlas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2DAM-egarveg810/code_atlas_practicas.git"
+  },
+  "private": true,
+  "dependencies": {
+    "sweetalert2": "^11.26.20"
+  }
+}
