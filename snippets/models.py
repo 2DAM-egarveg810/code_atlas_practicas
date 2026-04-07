@@ -51,7 +51,7 @@ class Snippet(models.Model):
             'django': 'bg-success',
             'sql': 'bg-dark',
             'java': 'bg-danger',
-            'php': 'bg-indigo',
+            'php': 'bg-info-subtle',
             'kotlin': 'bg-purple',
             'markdown': 'bg-light text-dark',
         }.get(self.language, 'bg-primary')

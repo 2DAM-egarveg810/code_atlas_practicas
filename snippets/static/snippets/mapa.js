@@ -11,7 +11,7 @@
     const LANG_COLORS = {
         'python': '#3776ab', 'javascript': '#f7df1e', 'typescript': '#3178c6',
         'html': '#e34c26', 'css': '#264de4', 'django': '#092e20',
-        'sql': '#336791', 'java': '#007396', 'php': '#777bb4',
+        'sql': '#336791', 'java': '#007396', 'php': '#8f93c7',
         'kotlin': '#7f52ff', 'markdown': '#083fa1'
     };
     const DEFAULT_COLOR = '#6c757d';
@@ -32,6 +32,7 @@
             showConfirmButton: false,
             timer: timer,
             timerProgressBar: true,
+            heightAuto: false,
             // Prueba de listeners. Funciona perfe
             didOpen: (toast) => {
                 toast.addEventListener('mouseenter', Swal.stopTimer);
@@ -58,6 +59,7 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText,
+            heightAuto: false,
             cancelButtonText,
             focusCancel: true
         });
@@ -259,7 +261,6 @@
 
     /**
      * Abre un popup con inputs para editar coordenadas manualmente.
-     * Nota: Usa showAlert para errores de validación en lugar de alert().
      */
     function openCoordinateEditor(snippetId, currentLat, currentLng, layer) {
         layer.closePopup();
@@ -308,7 +309,6 @@
 
     /**
      * Guarda las coordenadas actualizadas en el backend via API.
-     * Nota: Usa showAlert para feedback visual en lugar de alert().
      */
     async function saveCoordinates(snippetId, lat, lng, layer) {
         layer.bindTooltip('Guardando...', {permanent: true}).openTooltip();
@@ -460,9 +460,9 @@
         return cookieValue;
     }
 
+
     /**
      * Punto de entrada: inicializa componentes y vincula eventos al cargar el DOM.
-     * Nota: El evento pm:remove usa showConfirm para validar eliminación.
      */
     $(document).ready(async function () {
         initMap();

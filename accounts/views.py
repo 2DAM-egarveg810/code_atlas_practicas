@@ -1,14 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import forms, logout, login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
-
 from accounts.models import UserProfile
 from snippets.models import Snippet
-from django.db.models import Count
-from django.core.paginator import Paginator
 
 
 # Create your views here.
